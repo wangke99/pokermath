@@ -1,11 +1,6 @@
 from PokerRound import PokerRound
 import numpy as np
 
-d =2
-p = 4
-r = {'hand':25, 'base':8}
-
-#print t.get_all_hands()
 
 class PokerCalc():
     def __init__(self, decks, people, rules, n=10000):
@@ -61,16 +56,22 @@ class PokerCalc():
         return self.__get_i_sequence_probability(cards, player = -1)
             
 
-t = PokerCalc(d, p, r)
+if __name__ == '__main__':
 
-print t.get_sample_len()
+    d =2
+    p = 4
+    r = {'hand':25, 'base':8}
 
-print t.get_player_card_probability(1, 2)
-print t.get_player_card_probability(2,3)
-print t.get_player_card_probability(3,2)
-print t.get_player_card_probability(54,1)
+    t = PokerCalc(d, p, r)
 
-print t.get_player_sequence_probability([1,1,2,2])
-print t.get_host_sequency_probability([1,1,2,2])
+    print t.get_sample_len()
 
-print t.get_host_card_probability(1,2)
+    print t.get_player_card_probability(1, 2)
+    print t.get_player_card_probability(2,3)
+    print t.get_player_card_probability(3,2)
+    print t.get_player_card_probability(54,1)
+
+    print t.get_player_sequence_probability([1,1,2,2])
+    print t.get_host_sequency_probability([1,1,2,2])
+    
+    print t.get_host_card_probability(1,2)
