@@ -68,9 +68,9 @@ if __name__ == '__main__':
     d =2
     p = 4
     r = {'hand':25, 'base':8}
-    c = [40, 40, 51, 52, 51,53,52,52]
+    c = []
 
-    t = PokerCalc(decks = d, people = p, rules = r, out_cards = c, n=100000)
+    t = PokerCalc(decks = d, people = p, rules = r, out_cards = c, n=10000)
     print 'removed the following cards'
     print c
     print 'using %s samples' % (str(t.get_sample_len()))
