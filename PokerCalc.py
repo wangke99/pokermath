@@ -3,11 +3,16 @@ import numpy as np
 
 
 class PokerCalc():
-    def __init__(self, decks, people, rules, n=10000):
+    def __init__(self, decks, people, rules, out_cards=[], n=10000):
         self.length = n
         self.hands = []
+        self.decks = decks
+        self.people = people
+        self.rules = rules
+        self.out_cards = out_cards[:]
         for each in range(n):
-            self.hands.append(PokerRound(decks, people, rules).get_all_hands())
+            deal = PokerRound(decks = self.decks, people = self.people, rules = self.rules.copy(), cards = self.out_cards[:])
+            self.hands.append(deal.get_all_hands())
 
     def get_sample_len(self):
         return self.length
@@ -54,24 +59,31 @@ class PokerCalc():
 
     def get_host_sequency_probability(self, cards):
         return self.__get_i_sequence_probability(cards, player = -1)
-            
+
+    def get_hands(self):
+        return self.hands
 
 if __name__ == '__main__':
 
     d =2
     p = 4
     r = {'hand':25, 'base':8}
+    c = [40, 40, 51, 52, 51,53,52,52]
 
-    t = PokerCalc(d, p, r)
+    t = PokerCalc(decks = d, people = p, rules = r, out_cards = c, n=100000)
+    print 'removed the following cards'
+    print c
+    print 'using %s samples' % (str(t.get_sample_len()))
 
-    print t.get_sample_len()
-
-    print t.get_player_card_probability(1, 2)
-    print t.get_player_card_probability(2,3)
-    print t.get_player_card_probability(3,2)
-    print t.get_player_card_probability(54,1)
-
+    print 'probability of getting %s ' % (str([1,1,2,2]))
     print t.get_player_sequence_probability([1,1,2,2])
     print t.get_host_sequency_probability([1,1,2,2])
-    
-    print t.get_host_card_probability(1,2)
+
+
+    print 'probability of getting %s ' % (str([54,54]))
+    print t.get_player_sequence_probability([54,54])
+    print t.get_host_sequency_probability([54,54])
+
+    print 'probability of getting %s ' % (str([40]))
+    print t.get_player_sequence_probability([40])
+    print t.get_host_sequency_probability([40])
